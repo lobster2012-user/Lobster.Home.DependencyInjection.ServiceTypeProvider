@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lobster.Home.ServiceTypeProvider\Lobster.Home.DependencyInjection.ServiceTypeProvider.csproj" />
+    <ProjectReference Include="..\Lobster.Home.DependencyInjection.ServiceTypeProvider\Lobster.Home.DependencyInjection.ServiceTypeProvider.csproj" />
   </ItemGroup>
 
 </Project>
