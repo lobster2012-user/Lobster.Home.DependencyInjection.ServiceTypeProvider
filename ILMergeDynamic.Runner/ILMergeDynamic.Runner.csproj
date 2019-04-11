@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net452</TargetFramework>
+    <RootNamespace>ILMergeDynamic</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ILMerge" Version="3.0.29" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ILMergeDynamic.BaseModule\ILMergeDynamic.BaseModule.csproj" />
+    <ProjectReference Include="..\Lobster.Home.DependencyInjection.ServiceTypeProvider\Lobster.Home.DependencyInjection.ServiceTypeProvider.csproj" />
+  </ItemGroup>
+  <Target Name="ILMerge">
+    <!-- the ILMergePath property points to the location of ILMerge.exe console application -->
+    <Exec Command="$(ILMergeConsolePath) bin\$(Configuration)\net452\ILMergeDynamic.Runner.exe /out:bin\$(Configuration)\net452\merged\ILMergeDynamic.Runner.Merge.exe bin\$(Configuration)\net452\ILMergeDynamic.BaseModule.dll bin\$(Configuration)\net452\Lobster.Home.DependencyInjection.ServiceTypeProvider.dll" />
+  </Target>
+
+</Project>

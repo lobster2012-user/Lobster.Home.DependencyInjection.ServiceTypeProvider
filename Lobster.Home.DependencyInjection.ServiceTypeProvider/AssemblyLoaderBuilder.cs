@@ -62,7 +62,7 @@ namespace Lobster.Home.DependencyInjection
             var assemblies = new List<Assembly>(_assemblies);
             var files = new List<string>(_files);
             files.AddRange(_directories.SelectMany(dir => Directory.GetFiles(dir, _searchPattern)));
-            assemblies.AddRange(files.Select(file => Assembly.LoadFile(file)));
+            assemblies.AddRange(files.Select(file => Assembly.LoadFile(Path.GetFullPath(file))));
             return assemblies.ToArray();
         }
     }

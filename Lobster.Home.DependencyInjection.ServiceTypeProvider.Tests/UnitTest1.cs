@@ -2,6 +2,7 @@ using Lobster.Home.DependencyInjection;
 using NUnit.Framework;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace Tests
 {
