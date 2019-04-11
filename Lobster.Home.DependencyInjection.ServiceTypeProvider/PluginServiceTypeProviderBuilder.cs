@@ -48,7 +48,7 @@ namespace Lobster.Home.DependencyInjection
             this.Assemblies(System.AppDomain.CurrentDomain.GetAssemblies());
             return this;
         }
-            public PluginServiceTypeProviderBuilder Assemblies(params Assembly[] assemblies)
+        public PluginServiceTypeProviderBuilder Assemblies(params Assembly[] assemblies)
         {
             if (assemblies == null)
             {
@@ -63,13 +63,18 @@ namespace Lobster.Home.DependencyInjection
             _filter = filter;
         }
 
-        public PluginServiceTypeProvider Build()
+        public Assembly[] LoadAssemblies()
         {
             var assemblies = new List<Assembly>(_assemblies);
             var files = new List<string>(_files);
             files.AddRange(_directories.SelectMany(dir => Directory.GetFiles(dir, _searchPattern)));
             assemblies.AddRange(files.Select(file => Assembly.LoadFile(file)));
-            return new PluginServiceTypeProvider(assemblies, _filter);
+            return assemblies.ToArray();
+        }
+
+        public PluginServiceTypeProvider Build()
+        {
+            return new PluginServiceTypeProvider(LoadAssemblies(), _filter);
         }
     }
 }
