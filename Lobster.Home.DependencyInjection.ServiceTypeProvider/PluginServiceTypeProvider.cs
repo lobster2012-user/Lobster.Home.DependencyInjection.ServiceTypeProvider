@@ -11,7 +11,7 @@ namespace Lobster.Home.DependencyInjection
         private readonly Assembly[] _assemblies;
         private readonly Func<Type, bool> _filter;
 
-        public PluginServiceTypeProvider(IEnumerable<Assembly> assemblies, Func<Type, bool> filter)
+        public PluginServiceTypeProvider(IEnumerable<Assembly> assemblies, Func<Type, bool> filter = null)
         {
             _assemblies = assemblies.ToArray() ?? throw new ArgumentNullException(nameof(assemblies));
             _filter = filter ?? new Func<Type, bool>((_) => true);

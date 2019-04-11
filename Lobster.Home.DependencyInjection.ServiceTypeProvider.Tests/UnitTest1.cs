@@ -26,9 +26,9 @@ namespace Tests
         [Test]
         public void Test1()
         {
-            var provider = new PluginServiceTypeProviderBuilder()
+            var provider = new PluginServiceTypeProvider(new AssemblyLoaderBuilder()
                                     .UseLoadedAssemblies()
-                                    .Build();
+                                    .Load());
             {
                 var types = provider.GetServiceTypes(typeof(AC)).ToArray();
                 Console.WriteLine(string.Join("\r\n", types.Select(z => z.FullName)));

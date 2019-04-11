@@ -6,24 +6,23 @@ using System.Reflection;
 
 namespace Lobster.Home.DependencyInjection
 {
-    public class PluginServiceTypeProviderBuilder
+    public class AssemblyLoaderBuilder
     {
         private readonly List<string> _directories = new List<string>();
         private readonly List<string> _files = new List<string>();
         private readonly List<Assembly> _assemblies = new List<Assembly>();
         private string _searchPattern = "*.dll";
-        private Func<Type, bool> _filter = null;
 
-        public PluginServiceTypeProviderBuilder()
+        public AssemblyLoaderBuilder()
         {
 
         }
-        public PluginServiceTypeProviderBuilder SearchPattern(string searchPattern)
+        public AssemblyLoaderBuilder SearchPattern(string searchPattern)
         {
             _searchPattern = searchPattern ?? throw new ArgumentNullException(nameof(searchPattern));
             return this;
         }
-        public PluginServiceTypeProviderBuilder Directories(params String[] directories)
+        public AssemblyLoaderBuilder Directories(params String[] directories)
         {
             if (directories == null)
             {
@@ -33,7 +32,7 @@ namespace Lobster.Home.DependencyInjection
             _directories.AddRange(directories);
             return this;
         }
-        public PluginServiceTypeProviderBuilder Files(params String[] files)
+        public AssemblyLoaderBuilder Files(params String[] files)
         {
             if (files == null)
             {
@@ -43,12 +42,12 @@ namespace Lobster.Home.DependencyInjection
             _files.AddRange(files);
             return this;
         }
-        public PluginServiceTypeProviderBuilder UseLoadedAssemblies()
+        public AssemblyLoaderBuilder UseLoadedAssemblies()
         {
             this.Assemblies(System.AppDomain.CurrentDomain.GetAssemblies());
             return this;
         }
-        public PluginServiceTypeProviderBuilder Assemblies(params Assembly[] assemblies)
+        public AssemblyLoaderBuilder Assemblies(params Assembly[] assemblies)
         {
             if (assemblies == null)
             {
@@ -58,23 +57,13 @@ namespace Lobster.Home.DependencyInjection
             _assemblies.AddRange(assemblies);
             return this;
         }
-        public void Filter(Func<Type, bool> filter)
-        {
-            _filter = filter;
-        }
-
-        public Assembly[] LoadAssemblies()
+        public Assembly[] Load()
         {
             var assemblies = new List<Assembly>(_assemblies);
             var files = new List<string>(_files);
             files.AddRange(_directories.SelectMany(dir => Directory.GetFiles(dir, _searchPattern)));
             assemblies.AddRange(files.Select(file => Assembly.LoadFile(file)));
             return assemblies.ToArray();
-        }
-
-        public PluginServiceTypeProvider Build()
-        {
-            return new PluginServiceTypeProvider(LoadAssemblies(), _filter);
         }
     }
 }
