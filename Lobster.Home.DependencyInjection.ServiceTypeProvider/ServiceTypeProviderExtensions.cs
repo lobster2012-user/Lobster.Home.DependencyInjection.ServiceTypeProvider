@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lobster.Home.DependencyInjection
 {
-    public static class PluginServiceTypeProviderExtensions
+    public static class ServiceTypeProviderExtensions
     {
         
     }
