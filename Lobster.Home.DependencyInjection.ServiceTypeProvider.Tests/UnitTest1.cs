@@ -36,7 +36,7 @@ namespace Tests
                 Assert.AreEqual(typeof(DC), types[0]);
             }
             {
-                var types = provider.GetServiceTypes(typeof(IAC)).ToArray();
+                var types = provider.GetServiceTypes<IAC>().ToArray();
                 Console.WriteLine();
                 Console.WriteLine(string.Join("\r\n", types.Select(z => z.FullName)));
                 Assert.AreEqual(typeof(DC), types[0]);
