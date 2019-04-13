@@ -13,7 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lobster.Home.DependencyInjection.ServiceTypeProvider\Lobster.Home.DependencyInjection.ServiceTypeProvider.csproj" />
+    <Reference Include="ILMergeDynamic.Runner.Merge">
+      <HintPath>..\ILMergeDynamic.Runner\bin\$(Configuration)\$(TargetFramework)\merged\ILMergeDynamic.Runner.Merge.exe</HintPath>
+    </Reference>
   </ItemGroup>
+
+  <Target Name="Merge" BeforeTargets="AfterBuild">
+    <Exec Command="copy /Y .\..\ILMergeDynamic.DynamicModule\bin\$(Configuration)\$(TargetFramework)\ILMergeDynamic.DynamicModule.* bin\$(Configuration)\$(TargetFramework)\" />
+  </Target>
 
 </Project>

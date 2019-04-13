@@ -1,3 +1,4 @@
+using ILMergeDynamic;
 using Lobster.Home.DependencyInjection;
 using NUnit.Framework;
 using System;
@@ -6,42 +7,28 @@ using System.Reflection;
 
 namespace Tests
 {
-    public abstract class IAC
-    {
-
-    }
-    public abstract class AC : IAC
-    {
-
-    }
-    public abstract class AC2 : AC
-    {
-
-    }
-    public class DC : AC2
-    {
-
-    }
     public class Tests
     {
         [Test]
         public void Test1()
         {
-            var provider = new PluginServiceTypeProvider(new AssemblyLoaderBuilder()
+            ILMerge.AutoResolveMergedAssemblies.AutoResolverInstaller.EnsureInstalled();
+            var assemblies = new AssemblyLoaderBuilder()
                                     .UseLoadedAssemblies()
-                                    .Load());
-            {
-                var types = provider.GetServiceTypes(typeof(AC)).ToArray();
-                Console.WriteLine(string.Join("\r\n", types.Select(z => z.FullName)));
-                Assert.AreEqual(1, types.Length);
-                Assert.AreEqual(typeof(DC), types[0]);
-            }
-            {
-                var types = provider.GetServiceTypes<IAC>().ToArray();
-                Console.WriteLine();
-                Console.WriteLine(string.Join("\r\n", types.Select(z => z.FullName)));
-                Assert.AreEqual(typeof(DC), types[0]);
-            }
+                                    .Directories(System.IO.Path.GetDirectoryName(
+                                        typeof(Tests).Assembly.Location))
+                                    .Load();
+            assemblies = assemblies
+                                    .Where(z => !z.GetName()
+                                        .Name.StartsWith("nunit", StringComparison.OrdinalIgnoreCase))
+                                    .ToArray();
+
+            var provider = new PluginServiceTypeProvider(assemblies);
+            var types = provider.GetServiceTypes<BaseClass>().ToArray();
+            Console.WriteLine();
+            Console.WriteLine(string.Join("\r\n", types.Select(z => z.FullName)));
+            Assert.AreEqual(1, types.Length);
+            Assert.AreEqual("DerivedClass", types[0].Name);
         }
     }
 }
