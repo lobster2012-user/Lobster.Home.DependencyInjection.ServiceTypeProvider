@@ -3,7 +3,7 @@ using Lobster.Home.DependencyInjection;
 using System;
 using System.Linq;
 
-[assembly: AutoResolveMergedAssembliesAttribute(nameof(ILMerge.AutoResolveMergedAssemblies))]
+[assembly: AutoResolveMergedAssembliesAttribute("ILMerge.AutoResolveMergedAssemblies")]
 [assembly: AutoResolveMergedAssembliesAttribute("ILMergeDynamic.BaseModule")]
 [assembly: AutoResolveMergedAssembliesAttribute("Lobster.Home.DependencyInjection.ServiceTypeProvider")]
 
@@ -18,7 +18,7 @@ namespace ILMergeDynamic
 
             var assemblies = new AssemblyLoaderBuilder()
                                       .UseLoadedAssemblies()
-                                      .Directories(System.AppDomain.CurrentDomain.BaseDirectory)
+                                      .Directories(AppDomain.CurrentDomain.BaseDirectory)
                                       .Load();
             foreach(var a in assemblies)
             {

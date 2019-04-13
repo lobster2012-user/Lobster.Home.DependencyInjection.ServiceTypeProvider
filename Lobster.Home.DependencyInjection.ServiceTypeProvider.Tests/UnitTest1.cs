@@ -2,6 +2,7 @@ using ILMergeDynamic;
 using Lobster.Home.DependencyInjection;
 using NUnit.Framework;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -12,12 +13,25 @@ namespace Tests
         [Test]
         public void Test1()
         {
-            ILMerge.AutoResolveMergedAssemblies.AutoResolverInstaller.EnsureInstalled();
+#if NETCOREAPP
+            FieldInfo writeCoreHook = typeof(Debug).GetField("s_WriteCore", BindingFlags.Static | BindingFlags.NonPublic);
+            writeCoreHook.SetValue(null, new Action<string>((s) => Console.WriteLine(s)));
+#else
+            Debug.Listeners.Add(new ConsoleTraceListener());
+#endif
+            // First use our test logger to verify the output
+            //var originalWriteCoreHook = writeCoreHook.GetValue(null);
+            //writeCoreHook.SetValue(null, new Action<string>(WriteLogger.s_instance.WriteCore));
+            //Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+
             var assemblies = new AssemblyLoaderBuilder()
-                                    .UseLoadedAssemblies()
-                                    .Directories(System.IO.Path.GetDirectoryName(
-                                        typeof(Tests).Assembly.Location))
-                                    .Load();
+                                   .UseLoadedAssemblies()
+                                   .Directories(System.IO.Path.GetDirectoryName(
+                                       typeof(Tests).Assembly.Location))
+                                   .Load();
+
+            ILMerge.AutoResolveMergedAssemblies.AutoResolverInstaller.EnsureInstalled();
+           
             assemblies = assemblies
                                     .Where(z => !z.GetName()
                                         .Name.StartsWith("nunit", StringComparison.OrdinalIgnoreCase))
