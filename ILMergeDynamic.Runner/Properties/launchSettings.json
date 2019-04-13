@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ILMergeDynamic.Runner": {
+      "commandName": "Executable",
+      "executablePath": "F:\\Dev\\Net\\Lobster.Home.ServiceTypeProvider\\ILMergeDynamic.Runner\\bin\\Debug\\net452\\merged\\ILMergeDynamic.Runner.Merge.exe"
+    }
+  }
+}

@@ -21,12 +21,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ILMerge.AutoResolveMergedAssemblies\ILMerge.AutoResolveMergedAssemblies.csproj" />
     <ProjectReference Include="..\ILMergeDynamic.BaseModule\ILMergeDynamic.BaseModule.csproj" />
     <ProjectReference Include="..\Lobster.Home.DependencyInjection.ServiceTypeProvider\Lobster.Home.DependencyInjection.ServiceTypeProvider.csproj" />
   </ItemGroup>
-  <Target Name="ILMerge">
-    <!-- the ILMergePath property points to the location of ILMerge.exe console application -->
-    <Exec Command="$(ILMergeConsolePath) bin\$(Configuration)\net452\ILMergeDynamic.Runner.exe /out:bin\$(Configuration)\net452\merged\ILMergeDynamic.Runner.Merge.exe bin\$(Configuration)\net452\ILMergeDynamic.BaseModule.dll bin\$(Configuration)\net452\Lobster.Home.DependencyInjection.ServiceTypeProvider.dll" />
+  <Target Name="Merge" BeforeTargets="AfterBuild">
+    <!--<Exec Ommand="mkdir bin\$(Configuration)\$(TargetFramework)\merged"/>-->
+    <Exec Command="$(ILMergeConsolePath) bin\$(Configuration)\$(TargetFramework)\ILMergeDynamic.Runner.exe /out:bin\$(Configuration)\$(TargetFramework)\merged\ILMergeDynamic.Runner.Merge.exe /lib:bin\$(Configuration)\$(TargetFramework)" />
+    <Exec Command="copy /Y .\..\ILMergeDynamic.DynamicModule\bin\$(Configuration)\$(TargetFramework)\ILMergeDynamic.DynamicModule.* bin\$(Configuration)\$(TargetFramework)\merged\" />
   </Target>
 
 </Project>
