@@ -10,6 +10,11 @@
   [assembly: AutoResolveMergedAssembliesAttribute(nameof(ILMerge.AutoResolveMergedAssemblies))]
   [assembly: AutoResolveMergedAssembliesAttribute("ILMergeDynamic.BaseModule")]
   [assembly: AutoResolveMergedAssembliesAttribute("Lobster.Home.DependencyInjection.ServiceTypeProvider")]
+  
+  void Main(string[] args)
+  {
+       AutoResolverInstaller.EnsureInstalled();
+  }
 ```
 
 Under the hood
