@@ -25,16 +25,19 @@ namespace ILMerge.AutoResolveMergedAssemblies
                     }
                 }
                 var mergedAssemblies = new HashSet<string>(assembly.GetCustomAttributes<AutoResolverMergedAssembliesAttribute>()
-                    .SelectMany(z => z.AssemblyNames));
-                System.AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
+                    .SelectMany(z => z.AssemblyNames)).ToArray();
+                if (mergedAssemblies.Length > 0)
                 {
-                    var assemblyName = new AssemblyName(args.Name);
-                    if (mergedAssemblies.Contains(assemblyName.Name))
+                    System.AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
                     {
-                        return assembly;
-                    }
-                    return null;
-                };
+                        var assemblyName = new AssemblyName(args.Name);
+                        if (mergedAssemblies.Contains(assemblyName.Name))
+                        {
+                            return assembly;
+                        }
+                        return null;
+                    };
+                }
             }
         }
     }

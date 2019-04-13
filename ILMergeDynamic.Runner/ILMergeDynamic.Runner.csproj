@@ -27,7 +27,7 @@
   </ItemGroup>
   <Target Name="Merge" BeforeTargets="AfterBuild">
     <!--<Exec Ommand="mkdir bin\$(Configuration)\$(TargetFramework)\merged"/>-->
-    <Exec Command="$(ILMergeConsolePath) bin\$(Configuration)\$(TargetFramework)\ILMergeDynamic.Runner.exe /out:bin\$(Configuration)\$(TargetFramework)\merged\ILMergeDynamic.Runner.Merge.exe /lib:bin\$(Configuration)\$(TargetFramework)" />
+    <Exec Command="$(ILMergeConsolePath) /log /wildcards bin\$(Configuration)\$(TargetFramework)\ILMergeDynamic.Runner.exe /out:bin\$(Configuration)\$(TargetFramework)\merged\ILMergeDynamic.Runner.Merge.exe bin\$(Configuration)\$(TargetFramework)\*.dll" />
     <Exec Command="copy /Y .\..\ILMergeDynamic.DynamicModule\bin\$(Configuration)\$(TargetFramework)\ILMergeDynamic.DynamicModule.* bin\$(Configuration)\$(TargetFramework)\merged\" />
   </Target>
 

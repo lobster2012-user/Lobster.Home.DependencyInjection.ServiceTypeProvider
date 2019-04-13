@@ -16,10 +16,15 @@ namespace ILMergeDynamic
         {
             AutoResolverInstaller.EnsureInstalled();
 
-            var serviceProvider = new PluginServiceTypeProvider(new AssemblyLoaderBuilder()
+            var assemblies = new AssemblyLoaderBuilder()
                                       .UseLoadedAssemblies()
-                                      .Directories("plugins")
-                                      .Load());
+                                      .Directories(System.AppDomain.CurrentDomain.BaseDirectory)
+                                      .Load();
+            foreach(var a in assemblies)
+            {
+                Console.WriteLine(a.FullName);
+            }
+            var serviceProvider = new PluginServiceTypeProvider(assemblies);
             Console.WriteLine("bs :{0}", typeof(BaseClass).FullName);
             AppDomain.CurrentDomain.FirstChanceException += (a, b) =>
             {
