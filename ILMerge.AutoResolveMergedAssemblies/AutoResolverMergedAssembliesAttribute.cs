@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ILMerge.AutoResolveMergedAssemblies;
+using System;
+
+[assembly: AutoResolverMergedAssemblies(nameof(ILMerge.AutoResolveMergedAssemblies))]
 
 namespace ILMerge.AutoResolveMergedAssemblies
 {

@@ -4,8 +4,8 @@ using System;
 using System.Linq;
 
 
-[assembly: ILMerge.AutoResolveMergedAssemblies.AutoResolverMergedAssemblies("ILMergeDynamic.BaseModule")]
-[assembly: ILMerge.AutoResolveMergedAssemblies.AutoResolverMergedAssemblies("Lobster.Home.DependencyInjection.ServiceTypeProvider")]
+[assembly: AutoResolverMergedAssemblies("ILMergeDynamic.BaseModule")]
+[assembly: AutoResolverMergedAssemblies("Lobster.Home.DependencyInjection.ServiceTypeProvider")]
 
 namespace ILMergeDynamic
 {
