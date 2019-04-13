@@ -1,8 +1,6 @@
 ﻿using ILMerge.AutoResolveMergedAssemblies;
 using System;
 
-[assembly: AutoResolverMergedAssemblies(nameof(ILMerge.AutoResolveMergedAssemblies))]
-
 namespace ILMerge.AutoResolveMergedAssemblies
 {
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]

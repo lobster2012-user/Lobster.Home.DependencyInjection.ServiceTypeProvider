@@ -3,7 +3,7 @@ using Lobster.Home.DependencyInjection;
 using System;
 using System.Linq;
 
-
+[assembly: AutoResolverMergedAssemblies(nameof(ILMerge.AutoResolveMergedAssemblies))]
 [assembly: AutoResolverMergedAssemblies("ILMergeDynamic.BaseModule")]
 [assembly: AutoResolverMergedAssemblies("Lobster.Home.DependencyInjection.ServiceTypeProvider")]
 
