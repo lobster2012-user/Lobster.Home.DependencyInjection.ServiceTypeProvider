@@ -24,7 +24,7 @@ namespace ILMerge.AutoResolveMergedAssemblies
                         continue;
                     }
                 }
-                var mergedAssemblies = new HashSet<string>(assembly.GetCustomAttributes<AutoResolverMergedAssembliesAttribute>()
+                var mergedAssemblies = new HashSet<string>(assembly.GetCustomAttributes<AutoResolveMergedAssembliesAttributeAttribute>()
                     .SelectMany(z => z.AssemblyNames)).ToArray();
                 if (mergedAssemblies.Length > 0)
                 {

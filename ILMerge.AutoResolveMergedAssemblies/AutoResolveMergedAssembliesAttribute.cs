@@ -4,9 +4,9 @@ using System;
 namespace ILMerge.AutoResolveMergedAssemblies
 {
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-    public class AutoResolverMergedAssembliesAttribute : Attribute
+    public class AutoResolveMergedAssembliesAttributeAttribute : Attribute
     {
-        public AutoResolverMergedAssembliesAttribute(params string[] assemblyNames)
+        public AutoResolveMergedAssembliesAttributeAttribute(params string[] assemblyNames)
         {
             AssemblyNames = assemblyNames;
         }
