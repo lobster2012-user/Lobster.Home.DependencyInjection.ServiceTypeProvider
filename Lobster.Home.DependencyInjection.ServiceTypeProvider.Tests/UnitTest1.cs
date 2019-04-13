@@ -23,6 +23,7 @@ namespace Tests
             //var originalWriteCoreHook = writeCoreHook.GetValue(null);
             //writeCoreHook.SetValue(null, new Action<string>(WriteLogger.s_instance.WriteCore));
             //Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+            //netcore3.0 SetProvider(DebugProvider provider)
 
             var assemblies = new AssemblyLoaderBuilder()
                                    .UseLoadedAssemblies()

@@ -44,7 +44,7 @@ namespace Lobster.Home.DependencyInjection
         }
         public AssemblyLoaderBuilder UseLoadedAssemblies()
         {
-            this.Assemblies(System.AppDomain.CurrentDomain.GetAssemblies());
+            this.Assemblies(AppDomain.CurrentDomain.GetAssemblies());
             return this;
         }
         public AssemblyLoaderBuilder Assemblies(params Assembly[] assemblies)
