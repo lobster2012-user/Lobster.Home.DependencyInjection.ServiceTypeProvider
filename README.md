@@ -1,14 +1,15 @@
-# Lobster.Home.DependencyInjection.ServiceTypeProvider
+# IServiceTypeProvider
+# ILMerge.AutoResolveMergedAssemblies
+
 * IServiceTypeProvider  - ServiceProvider for Types. 
-* ILMerge.AutoResolveMergedAssemblies - Example of using [**ILMerge**](https://github.com/dotnet/ILMerge) for dynamically loaded assemblies.
+* ILMerge.AutoResolveMergedAssemblies
+- Example of using [**ILMerge**](https://github.com/dotnet/ILMerge) for dynamically loaded assemblies.
   You need use attributes in main assembly
-  ```csharp
+```csharp
   
   [assembly: AutoResolveMergedAssembliesAttribute(nameof(ILMerge.AutoResolveMergedAssemblies))]
   [assembly: AutoResolveMergedAssembliesAttribute("ILMergeDynamic.BaseModule")]
   [assembly: AutoResolveMergedAssembliesAttribute("Lobster.Home.DependencyInjection.ServiceTypeProvider")]
-  
-
 ```
 
 Under the hood
