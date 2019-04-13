@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Lobster.Home.DependencyInjection.ServiceTypeProvider.Tests\UnitTest1.cs" Link="UnitTest1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="nunit" Version="3.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
+    <ProjectReference Include="..\ILMerge.AutoResolveMergedAssemblies\ILMerge.AutoResolveMergedAssemblies.csproj" />
+    <ProjectReference Include="..\ILMergeDynamic.BaseModule\ILMergeDynamic.BaseModule.csproj" />
+    <ProjectReference Include="..\ILMergeDynamic.DynamicModule\ILMergeDynamic.DynamicModule.csproj" />
+    <ProjectReference Include="..\ILMergeDynamic.Runner\ILMergeDynamic.Runner.csproj" />
+    <ProjectReference Include="..\Lobster.Home.DependencyInjection.ServiceTypeProvider\Lobster.Home.DependencyInjection.ServiceTypeProvider.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ILMergeDynamic.Runner.Merge" Condition="'$(TargetFramework)' == 'net452'">
+      <HintPath>..\ILMergeDynamic.Runner\bin\$(Configuration)\$(TargetFramework)\merged\ILMergeDynamic.Runner.Merge.exe</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+  <Target Name="Merge" BeforeTargets="AfterBuild" Condition="'$(TargetFramework)' == 'net452'">
+    <Exec Command="copy /Y .\..\ILMergeDynamic.DynamicModule\bin\$(Configuration)\$(TargetFramework)\ILMergeDynamic.DynamicModule.* bin\$(Configuration)\$(TargetFramework)\" />
+  </Target>
+
+</Project>
