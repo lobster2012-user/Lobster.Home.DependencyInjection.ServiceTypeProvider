@@ -1,20 +1,36 @@
-﻿using ILMerge.AutoResolveMergedAssemblies;
-using Lobster.Home.DependencyInjection;
+﻿using Lobster.Home.DependencyInjection;
 using System;
 using System.Linq;
 
+#if !FODY
+using ILMerge.AutoResolveMergedAssemblies;
 [assembly: AutoResolveMergedAssembliesAttribute("ILMerge.AutoResolveMergedAssemblies")]
 [assembly: AutoResolveMergedAssembliesAttribute("ILMergeDynamic.BaseModule")]
 [assembly: AutoResolveMergedAssembliesAttribute("Lobster.Home.DependencyInjection.ServiceTypeProvider")]
-
+#endif
 namespace ILMergeDynamic
 {
 
-    class Program
+    public class Program
     {
+#if !NETCOREAPP
+#if FODY
+        public static void CosturaUtility_Initialize()
+        {
+            CosturaUtility.Initialize();
+        }
+#endif
+#endif
         static void Main(string[] args)
         {
+#if FODY
+#if !NETCOREAPP
+            CosturaUtility.Initialize();
+#endif
+#else
+
             AutoResolverInstaller.EnsureInstalled();
+#endif
 
             var assemblies = new AssemblyLoaderBuilder()
                                       .UseLoadedAssemblies()

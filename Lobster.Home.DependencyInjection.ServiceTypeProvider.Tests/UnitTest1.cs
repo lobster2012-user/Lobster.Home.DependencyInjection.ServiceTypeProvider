@@ -13,7 +13,17 @@ namespace Tests
         [Test]
         public void Test1()
         {
+#if !NETCOREAPP
+#if FODY
+            ILMergeDynamic.Program.CosturaUtility_Initialize();
+#endif
+#endif
+            Test1Impl();
+        }
+        public void Test1Impl()
+        {
 #if NETCOREAPP
+            Console.WriteLine(typeof(IServiceTypeProvider));
             FieldInfo writeCoreHook = typeof(Debug).GetField("s_WriteCore", BindingFlags.Static | BindingFlags.NonPublic);
             writeCoreHook.SetValue(null, new Action<string>((s) => Console.WriteLine(s)));
 #else
@@ -30,9 +40,9 @@ namespace Tests
                                    .Directories(System.IO.Path.GetDirectoryName(
                                        typeof(Tests).Assembly.Location))
                                    .Load();
-
+#if !FODY
             ILMerge.AutoResolveMergedAssemblies.AutoResolverInstaller.EnsureInstalled();
-           
+#endif
             assemblies = assemblies
                                     .Where(z => !z.GetName()
                                         .Name.StartsWith("nunit", StringComparison.OrdinalIgnoreCase))

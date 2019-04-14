@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net452;netcoreapp2.2</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefineConstants>TRACE;FODY</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\ILMergeDynamic.Runner\Program.cs" Link="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="3.3.3" />
+  </ItemGroup>
+
+  <ItemGroup >
+    <ProjectReference Include="..\ILMergeDynamic.BaseModule\ILMergeDynamic.BaseModule.csproj">
+      <Private  Condition="'$(TargetFramework)'=='net452'">false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Lobster.Home.DependencyInjection.ServiceTypeProvider\Lobster.Home.DependencyInjection.ServiceTypeProvider.csproj">
+      <Private  Condition="'$(TargetFramework)'=='net452'">false</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>

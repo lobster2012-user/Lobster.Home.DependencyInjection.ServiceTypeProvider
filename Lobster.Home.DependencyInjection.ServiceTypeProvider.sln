@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lobster.Home.DependencyInjection.ServiceTypeProvider.NetCore.Tests", "Lobster.Home.DependencyInjection.ServiceTypeProvider.Tests\Lobster.Home.DependencyInjection.ServiceTypeProvider.NetCore.Tests.csproj", "{5AED5E57-E000-4C76-B6C9-AC90E280D367}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ILMerge.NetCore.Tests", "Lobster.Home.DependencyInjection.ServiceTypeProvider.Tests\ILMerge.NetCore.Tests.csproj", "{5AED5E57-E000-4C76-B6C9-AC90E280D367}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0303E378-3D8F-44D2-A190-503FD09ACBFD} = {0303E378-3D8F-44D2-A190-503FD09ACBFD}
 		{020E45DA-B2B6-46EC-8923-5DF59CD95740} = {020E45DA-B2B6-46EC-8923-5DF59CD95740}
@@ -20,9 +20,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ILMergeDynamic.Runner", "IL
 		{0303E378-3D8F-44D2-A190-503FD09ACBFD} = {0303E378-3D8F-44D2-A190-503FD09ACBFD}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILMerge.AutoResolveMergedAssemblies", "ILMerge.AutoResolveMergedAssemblies\ILMerge.AutoResolveMergedAssemblies.csproj", "{3002F051-E53E-4214-94C6-6C00C5E9C28F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ILMerge.AutoResolveMergedAssemblies", "ILMerge.AutoResolveMergedAssemblies\ILMerge.AutoResolveMergedAssemblies.csproj", "{3002F051-E53E-4214-94C6-6C00C5E9C28F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lobster.Home.DependencyInjection.ServiceTypeProvider.NetFx.Tests", "Lobster.Home.DependencyInjection.ServiceTypeProvider..Net.Tests\Lobster.Home.DependencyInjection.ServiceTypeProvider.NetFx.Tests.csproj", "{ABEF7986-91BF-4209-857B-9A80C14C6C42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ILMerge.NetFx.Tests", "Lobster.Home.DependencyInjection.ServiceTypeProvider..Net.Tests\ILMerge.NetFx.Tests.csproj", "{ABEF7986-91BF-4209-857B-9A80C14C6C42}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ILMergeDynamic.Fody.Runner", "ILMergeDynamic.Fody.Runner\ILMergeDynamic.Fody.Runner.csproj", "{E2131087-2A19-4CDE-B7D2-B679BC54F4C4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fody.NetFx.Tests", "Fody.NetFx.Tests\Fody.NetFx.Tests.csproj", "{0337847D-00F4-4441-888A-C864596B2F4E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E2131087-2A19-4CDE-B7D2-B679BC54F4C4} = {E2131087-2A19-4CDE-B7D2-B679BC54F4C4}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07E9A668-0A02-4613-B4D1-FE25D1832C7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C5D4C9FC-14E3-4763-B98E-55FD3D4DB452}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,9 +69,28 @@ Global
 		{ABEF7986-91BF-4209-857B-9A80C14C6C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABEF7986-91BF-4209-857B-9A80C14C6C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABEF7986-91BF-4209-857B-9A80C14C6C42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2131087-2A19-4CDE-B7D2-B679BC54F4C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2131087-2A19-4CDE-B7D2-B679BC54F4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2131087-2A19-4CDE-B7D2-B679BC54F4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2131087-2A19-4CDE-B7D2-B679BC54F4C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0337847D-00F4-4441-888A-C864596B2F4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0337847D-00F4-4441-888A-C864596B2F4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0337847D-00F4-4441-888A-C864596B2F4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0337847D-00F4-4441-888A-C864596B2F4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5AED5E57-E000-4C76-B6C9-AC90E280D367} = {07E9A668-0A02-4613-B4D1-FE25D1832C7E}
+		{DD080757-547B-4261-B211-802484F2EDBA} = {C5D4C9FC-14E3-4763-B98E-55FD3D4DB452}
+		{25C4F67D-0875-4B47-89C3-089AF13B81BE} = {C5D4C9FC-14E3-4763-B98E-55FD3D4DB452}
+		{0303E378-3D8F-44D2-A190-503FD09ACBFD} = {C5D4C9FC-14E3-4763-B98E-55FD3D4DB452}
+		{020E45DA-B2B6-46EC-8923-5DF59CD95740} = {C5D4C9FC-14E3-4763-B98E-55FD3D4DB452}
+		{3002F051-E53E-4214-94C6-6C00C5E9C28F} = {C5D4C9FC-14E3-4763-B98E-55FD3D4DB452}
+		{ABEF7986-91BF-4209-857B-9A80C14C6C42} = {07E9A668-0A02-4613-B4D1-FE25D1832C7E}
+		{E2131087-2A19-4CDE-B7D2-B679BC54F4C4} = {C5D4C9FC-14E3-4763-B98E-55FD3D4DB452}
+		{0337847D-00F4-4441-888A-C864596B2F4E} = {07E9A668-0A02-4613-B4D1-FE25D1832C7E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BDB82A1F-BEEB-4BD1-A077-12F72A06A65B}
