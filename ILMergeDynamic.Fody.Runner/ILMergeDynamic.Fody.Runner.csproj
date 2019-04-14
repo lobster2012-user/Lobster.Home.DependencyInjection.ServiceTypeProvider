@@ -17,12 +17,14 @@
     <PackageReference Include="Costura.Fody" Version="3.3.3" />
   </ItemGroup>
 
-  <ItemGroup >
+  <ItemGroup>
     <ProjectReference Include="..\ILMergeDynamic.BaseModule\ILMergeDynamic.BaseModule.csproj">
-      <Private  Condition="'$(TargetFramework)'=='net452'">false</Private>
+      <Private Condition="'$(TargetFramework)'=='net452'">false</Private>
+      <Private>true</Private>
     </ProjectReference>
     <ProjectReference Include="..\Lobster.Home.DependencyInjection.ServiceTypeProvider\Lobster.Home.DependencyInjection.ServiceTypeProvider.csproj">
-      <Private  Condition="'$(TargetFramework)'=='net452'">false</Private>
+      <Private Condition="'$(TargetFramework)'=='net452'">false</Private>
+      <Private>true</Private>
     </ProjectReference>
   </ItemGroup>
 
