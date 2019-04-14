@@ -22,6 +22,7 @@
       <Private Condition="'$(TargetFramework)'=='net452'">false</Private>
       <Private>true</Private>
     </ProjectReference>
+    <ProjectReference Include="..\ILMergeDynamic.DynamicModule\ILMergeDynamic.DynamicModule.csproj" />
     <ProjectReference Include="..\Lobster.Home.DependencyInjection.ServiceTypeProvider\Lobster.Home.DependencyInjection.ServiceTypeProvider.csproj">
       <Private Condition="'$(TargetFramework)'=='net452'">false</Private>
       <Private>true</Private>
